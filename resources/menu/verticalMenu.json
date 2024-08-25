@@ -1,0 +1,33 @@
+{
+  "menu": [
+    {
+      "url": "/",
+      "name": "Dashboard",
+      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "slug": "pages-home"
+    },
+    {
+      "url": "/page-2",
+      "icon": " menu-icon bx bx-grid-alt bx-sm",
+      "name": " IOT ",
+      "slug": "pages-page-2",
+      "submenu": [
+        {
+          "url": "/index-things-iot",
+          "name": "Crear Dispositivos",
+          "slug": "pages-page-2-subpage-1"
+        },
+        {
+          "url": "/index-things-iot/list",
+          "name": "Lista de dispositivo",
+          "slug": "pages-page-2-subpage-2"
+        },
+        {
+          "url": "/index-things-iot/create-variable",
+          "name": "Crear variables",
+          "slug": "pages-page-2-subpage-2"
+        }
+      ]
+    }
+  ]
+}
