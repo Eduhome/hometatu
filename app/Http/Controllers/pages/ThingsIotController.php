@@ -56,9 +56,9 @@ class ThingsIotController extends Controller
     $activeDevices = Device::where('things_iots', $thingIot->id)->where('status', 1)->get();
 
 
-    if (Auth::check() && Auth::id() !== $thingIot->user_id) {
-        return abort(403, 'Acceso denegado.');
-    }
+    // if (Auth::check() && Auth::id() !== $thingIot->user_id) {
+    //     return abort(403, 'Acceso denegado.');
+    // }
     return view('things_iot.index', compact('thingIot', 'activeDevices'));
     }
 
