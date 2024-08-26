@@ -24,9 +24,9 @@ class ThingsIotController extends Controller
 
     public function store(Request $request)
     {
-      if (!Auth::check()) {
-        return redirect()->route('login')->with('error', 'Debe iniciar sesión para crear un objeto.');
-    }
+    //   if (!Auth::check()) {
+    //     return redirect()->route('login')->with('error', 'Debe iniciar sesión para crear un objeto.');
+    // }
 
         $key_url = Str::random(20);
         $user_id = Auth::id();

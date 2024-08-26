@@ -92,14 +92,14 @@ $customizerHidden = 'customizer-hide';
           <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
         </form>
 
-        <p class="text-center">
+        {{-- <p class="text-center">
           <span>New on our platform?</span>
           @if (Route::has('register'))
           <a href="{{ route('register') }}">
             <span>Create an account</span>
           </a>
           @endif
-        </p>
+        </p> --}}
 
         <div class="divider my-4">
           <div class="divider-text">or</div>
