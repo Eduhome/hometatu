@@ -37,7 +37,8 @@ class DeviceControlController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+{
+    try {
         $request->validate([
             'name' => 'required|string|max:255',
             'control_type' => 'required|in:float,boolean,character',
@@ -53,8 +54,6 @@ class DeviceControlController extends Controller
             'value' => $request->value ?? null,
             'permissions' => $request->permissions,
             'update_policy' => $request->update_policy,
-            // Campos opcionales permitidos como nulos
-
             'campo_personalizado1' => $request->campo_personalizado1 ?? null,
             'campo_personalizado2' => $request->campo_personalizado2 ?? null,
             'campo_personalizado3' => $request->campo_personalizado3 ?? null,
@@ -62,7 +61,16 @@ class DeviceControlController extends Controller
         ]);
 
         return response()->json(['success' => 'Variable creada exitosamente.']);
+
+    } catch (\Exception $e) {
+        // Registra el error en el archivo de log
+        \Log::error('Error al crear el DeviceControl: '.$e->getMessage());
+
+        // Devuelve una respuesta JSON con el error
+        return response()->json(['error' => 'Hubo un error al crear la variable.'], 500);
     }
+}
+
 
     /**
      * Display the specified resource.

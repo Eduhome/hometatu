@@ -6,11 +6,12 @@
         <h5 class="modal-title" id="modalCenterTitle">Crear variable</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <h1>erikc</h1>
+
       <div class="modal-body">
         <form id="deviceControlForm">
           @csrf
-          <input type="hidden" id="device_id" value="">
+          <!-- Usar el id_device pasado desde la vista -->
+          <input type="hidden" id="device_id" value="{{ $id_device }}">
           <div class="row mb-3">
             <div class="col">
               <label for="deviceName" class="form-label">Nombre de la variable</label>
@@ -55,7 +56,6 @@
   </div>
 </div>
 
-
 <script>
   document.getElementById('submitDevice').addEventListener('click', function() {
     const deviceNameElement = document.getElementById('deviceName');
@@ -64,6 +64,7 @@
     const updatePolicyElement = document.getElementById('update_policy');
     const deviceIdElement = document.getElementById('device_id');
 
+    // Verificar si todos los elementos existen
     if (deviceNameElement && controlTypeElement && permissionsElement && updatePolicyElement && deviceIdElement) {
       const deviceName = deviceNameElement.value;
       const controlType = controlTypeElement.value;
@@ -78,8 +79,9 @@
         update_policy: updatePolicy,
         device_id: deviceId,
       };
-      
-      fetch('/device-controls', {
+      console.log(data);
+
+      fetch('{{ url('/device-controls') }}', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -87,14 +89,18 @@
         },
         body: JSON.stringify(data)
       })
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+      })
       .then(data => {
         console.log('Success:', data);
         alert('Variable creada exitosamente.');
         $('#modalCenter').modal('hide'); // Cierra el modal
         window.location.reload(); // Recarga la página para mostrar los cambios
       })
-
       .catch((error) => {
         console.error('Error:', error);
         alert('Hubo un error al crear la variable.');
@@ -103,4 +109,4 @@
       console.error('One or more elements are missing.');
     }
   });
-  </script>
+</script>

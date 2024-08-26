@@ -20,7 +20,7 @@
           <div class="onboarding-info">In this example you can see a form where you can request some additional
             information from the customer when they land on the app page.</div>
           <form id="deviceForm">
-            @csrf <!-- Agrega el token CSRF aquí -->
+            @csrf
             <div class="row">
               <div class="col-sm-6">
                 <div class="mb-3">
@@ -55,7 +55,7 @@ document.getElementById('submitDevice').addEventListener('click', function() {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-CSRF-TOKEN': '{{ csrf_token() }}' // Asegura que el token CSRF sea enviado correctamente
+      'X-CSRF-TOKEN': '{{ csrf_token() }}'
     },
     body: JSON.stringify(data)
   })
