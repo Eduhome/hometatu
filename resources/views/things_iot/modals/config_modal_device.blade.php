@@ -20,11 +20,12 @@
           <div class="onboarding-info">In this example you can see a form where you can request some additional
             information from the customer when they land on the app page.</div>
           <form id="deviceForm">
+            @csrf <!-- Agrega el token CSRF aquí -->
             <div class="row">
               <div class="col-sm-6">
                 <div class="mb-3">
                   <label for="nameEx7" class="form-label">Nombre del dispositivo</label>
-                  <input class="form-control" placeholder="Nombre del dispositivo" type="text" id="deviceName">
+                  <input class="form-control" placeholder="Nombre del dispositivo" type="text" id="deviceName" name="name">
                 </div>
               </div>
             </div>
@@ -51,26 +52,21 @@ document.getElementById('submitDevice').addEventListener('click', function() {
   };
 
   fetch('{{ url('/devices') }}', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-  },
-  body: JSON.stringify(data)
-})
-.then(response => {
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
-  }
-  return response.json();
-})
-.then(data => {
-  console.log('Success:', data);
-  alert('Device created with secret key: ' + data.secret_key);
-  window.location.reload();
-})
-.catch((error) => {
-  console.error('Error:', error);
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-TOKEN': '{{ csrf_token() }}' // Asegura que el token CSRF sea enviado correctamente
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Success:', data);
+    alert('Device created with secret key: ' + data.secret_key);
+    window.location.reload();
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
 });
-
 </script>
