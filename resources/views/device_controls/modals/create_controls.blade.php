@@ -6,6 +6,7 @@
         <h5 class="modal-title" id="modalCenterTitle">Crear variable</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      <h1>erikc</h1>
       <div class="modal-body">
         <form id="deviceControlForm">
           @csrf
