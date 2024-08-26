@@ -24,9 +24,9 @@ class ThingsIotController extends Controller
 
     public function store(Request $request)
     {
-    //   if (!Auth::check()) {
-    //     return redirect()->route('login')->with('error', 'Debe iniciar sesión para crear un objeto.');
-    // }
+      if (!Auth::check()) {
+        return redirect()->route('login')->with('error', 'Debe iniciar sesión para crear un objeto.');
+    }
 
         $key_url = Str::random(20);
         $user_id = Auth::id();
@@ -54,6 +54,7 @@ class ThingsIotController extends Controller
 
     $thingIot = Things_iot::where('key_url', $key_url)->firstOrFail();
     $activeDevices = Device::where('things_iots', $thingIot->id)->where('status', 1)->get();
+    dd($activeDevices);
 
     if (Auth::check() && Auth::id() !== $thingIot->user_id) {
         return abort(403, 'Acceso denegado.');
