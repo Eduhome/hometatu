@@ -2,26 +2,6 @@
 
 @section('title', 'Lista de Objetos IOT')
 
-@section('vendor-style')
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css') }}">
-@endsection
-
-@section('vendor-script')
-    <script src="{{ asset('assets/vendor/libs/moment/moment.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/datatables/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/datatables-responsive/datatables.responsive.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/datatables-buttons/datatables-buttons.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.js') }}"></script>
-@endsection
-
-@section('page-script')
-    <script src="{{ asset('assets/js/app-invoice-list.js') }}"></script>
-@endsection
-
 @section('content')
     <div class="content-wrapper">
         <div class="container-xxl flex-grow-1 container-p-y">
@@ -47,7 +27,7 @@
                             <tr>
                                 <td>{{ $thing->name }}</td>
                                 <td>
-                                    <a href="{{ url('/index-things-iot/' . $thing->key_url . '/setup') }}" target="_blank">{{ $thing->key_url }}</a>
+                                    <a href="{{ url('/objeto_creado/' . $thing->key_url . '/setup') }}" target="_blank">{{ $thing->key_url }}</a>
                                 </td>
                                 <td>{{ $thing->created_at }}</td>
                                 <td>{{ $thing->device_name }}</td>

@@ -13,4 +13,10 @@ class DeviceControl extends Model
     protected $fillable = [
       'device_id', 'name', 'control_type', 'value', 'permissions', 'update_policy', 'campo_personalizado1', 'campo_personalizado2', 'campo_personalizado3', 'status'
   ];
+
+
+  public function device()
+    {
+        return $this->belongsTo(Device::class, 'device_id');
+    }
 }

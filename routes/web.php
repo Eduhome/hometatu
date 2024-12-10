@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\pages\ThingsIotController;
 use App\Http\Controllers\pages\DeviceController;
 use App\Http\Controllers\pages\DeviceControlController;
+use App\Http\Controllers\ControlAssociationController;
 
 
 
@@ -37,13 +38,13 @@ $controller_path = 'App\Http\Controllers';
     Route::get('/', $controller_path . '\pages\HomePage@index')->name('pages-home');
 
   // rutas de confguracion del objeto
-    Route::get('/index-things-iot', [ThingsIotController::class, 'index'])->name('things_iots.index');
+    Route::get('/crear_objeto', [ThingsIotController::class, 'index'])->name('things_iots.index');
     Route::post('/things-iots/store', [ThingsIotController::class, 'store'])->name('things_iots.store');
-    Route::get('/index-things-iot/{key_url}/setup', [ThingsIotController::class, 'showByKeyUrl'])->name('things_iots.showByKeyUrl');
+    Route::get('/objeto_creado/{key_url}/setup', [ThingsIotController::class, 'showByKeyUrl'])->name('things_iots.showByKeyUrl');
     Route::post('/device/unlink/{deviceId}', [ThingsIotController::class, 'unlinkDevice'])->name('device.unlink');
 
     // listar dispositivos y objetos
-    Route::get('/index-things-iot/list', [ThingsIotController::class, 'things_lists'])->name('things_iots.show');
+    Route::get('/lista_objetos/lista', [ThingsIotController::class, 'things_lists'])->name('things_iots.show');
     Route::post('/objects/store', [ThingsIotController::class, 'store'])->name('objects.store');
 
 
@@ -52,9 +53,13 @@ $controller_path = 'App\Http\Controllers';
       Route::post('/devices', [DeviceController::class, 'store']);
 
       //rutas de controls de varaibles de los dispositivos
+      Route::get('/list-device-control', [DeviceControlController::class, 'index'])->name('list.device_control');
+      Route::get('/dispositivos', [DeviceControlController::class, 'getDispositivos'])->name('dispositivos.list');
 
-      Route::get('/add-device-controls/create/{id_device}', [DeviceControlController::class, 'create'])->name('add_controls.create');
+      Route::get('/lista-dispositivos/lista/{id_device}', [DeviceControlController::class, 'create'])->name('add_controls.create');
       Route::post('/device-controls', [DeviceControlController::class, 'store'])->name('device_controls.store');
+
+      Route::post('/associate-control', [ControlAssociationController::class, 'store'])->name('associate-control');
 
 });
 

@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\pages;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\DeviceControl;
 use Illuminate\Http\Request;
@@ -16,7 +17,18 @@ class DeviceControlController extends Controller
     public function index()
     {
         //
+        return view('device_controls.index' );
     }
+
+    public function getDispositivos(){
+
+      $dispositivos = DeviceControl::all(); // Obtener todos los dispositivos
+
+      return response()->json([
+          'data' => $dispositivos
+      ]);
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -27,8 +39,31 @@ class DeviceControlController extends Controller
     {
       // dd($id_device);
         // Aquí puedes utilizar $id_device para lo que necesites
-        return view('device_controls.create', compact('id_device'));
-    }
+      $userId = auth()->id(); // ID del usuario autenticado
+      $lista_dispositivos = DB::table('things_iots')
+        ->join('devices', 'things_iots.id', '=', 'devices.things_iots')
+        ->join('device_controls', 'devices.id', '=', 'device_controls.device_id')
+        ->join('users', 'devices.user_id', '=', 'users.id')
+        ->where('device_controls.status', 1)
+        ->where('devices.user_id',$userId )
+        ->where('device_controls.device_id',$id_device )
+        ->select(
+
+            'devices.name as dispositivo',
+            'devices.secret_key',
+            'device_controls.name as nombre_control',
+            'device_controls.control_type',
+            'device_controls.permissions',
+            'device_controls.status'
+
+        )
+        ->get();
+
+        // dd($lista_dispositivos);
+
+
+        return view('device_controls.create', compact('id_device', 'lista_dispositivos'));
+      }
 
     /**
      * Store a newly created resource in storage.
@@ -38,6 +73,7 @@ class DeviceControlController extends Controller
      */
     public function store(Request $request)
 {
+
     try {
         $request->validate([
             'name' => 'required|string|max:255',

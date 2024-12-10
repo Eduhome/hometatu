@@ -103,13 +103,15 @@ public function unlinkDevice($deviceId)
         'things_iots.key_url',
         'things_iots.created_at',
         'devices.name as device_name',
-        'things_iots.status',
+        'devices.status as status' ,
         'devices.id'
     )
+
     ->join('users', 'things_iots.user_id', '=', 'users.id')
     ->join('devices', 'things_iots.id', '=', 'devices.things_iots')
     ->where('devices.status', 1)
     ->get();
+
 
     return view('things_iot.show', ['things' => $Things]);
 }

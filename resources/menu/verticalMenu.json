@@ -13,17 +13,17 @@
       "slug": "pages-page-2",
       "submenu": [
         {
-          "url": "/index-things-iot",
+          "url": "/crear_objeto",
           "name": "Crear Dispositivos",
           "slug": "pages-page-2-subpage-1"
         },
         {
-          "url": "/index-things-iot/list",
+          "url": "/lista_objetos/lista",
           "name": "Lista de dispositivo",
           "slug": "pages-page-2-subpage-2"
         },
         {
-          "url": "/index-things-iot/create-variable",
+          "url": "/list-device-control",
           "name": "Crear variables",
           "slug": "pages-page-2-subpage-2"
         }

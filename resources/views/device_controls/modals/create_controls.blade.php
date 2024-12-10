@@ -9,7 +9,7 @@
 
       <div class="modal-body">
         <form id="deviceControlForm">
-          @csrf
+          @csrfa
           <!-- Usar el id_device pasado desde la vista -->
           <input type="hidden" id="device_id" value="{{ $id_device }}">
           <div class="row mb-3">
